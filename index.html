@@ -1,102 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="app.css" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
       integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="app.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function (event) {
-        console.log('DOMContentLoaded', event);
-        chart();
+      document.addEventListener("DOMContentLoaded", function (event) {
+        init();
       });
-
-      fetch('https://api.github.com/repos/khiopsrelease/kv-release/releases')
-        .then(function (response) {
-          // The API call was successful!
-          return response.json();
-        })
-        .then(function (data) {
-          // This is the JSON from our response
-          console.log(data);
-          show(data);
-        })
-        .catch(function (err) {
-          // There was an error
-          console.warn('Something went wrong.', err);
-        });
-
-      function chart() {
-        const ctx = document.getElementById('myChart');
-        const myChart = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [
-              {
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)',
-                ],
-                borderWidth: 1,
-              },
-            ],
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          },
-        });
-      }
-
-      function show(data) {
-        const ul = document.getElementById('posts');
-        const list = document.createDocumentFragment();
-
-        data.map(function (post) {
-          console.log(post);
-
-          let li = document.createElement('li');
-          let title = document.createElement('h1');
-          let body = document.createElement('p');
-          title.innerHTML = `${post.name}`;
-
-          try {
-            body.innerHTML = `win downloads : ${post.assets[6].download_count}`;
-          } catch (e) {}
-          li.appendChild(title);
-          li.appendChild(body);
-          list.appendChild(li);
-        });
-
-        ul.appendChild(list);
-      }
     </script>
   </head>
   <body>
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <h1>Khiops Visualization</h1>
+    <section>
+      <div class="canvas-container">
+        <canvas id="kv-dl" height="200px"></canvas>
+      </div>
+      <div class="canvas-container">
+        <canvas id="kv-launch" height="200px"></canvas>
+      </div>
+    </section>
+    <h1>Khiops Covisualization</h1>
+    <section>
+      <div class="canvas-container">
+        <canvas id="kc-dl" height="200px"></canvas>
+      </div>
 
-    <section id="section">
-      <ul id="posts"></ul>
+      <div class="canvas-container">
+        <canvas id="kc-launch" height="200px"></canvas>
+      </div>
     </section>
   </body>
 </html>
