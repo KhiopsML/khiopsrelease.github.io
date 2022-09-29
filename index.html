@@ -1,27 +1,49 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html>
-<head>
-<script>
-fetch('https://api.github.com/repos/khiopsrelease/kv-release/releases').then(function (response) {
-	// The API call was successful!
-	return response.json();
-}).then(function (data) {
-	// This is the JSON from our response
-	console.log(data);
-}).catch(function (err) {
-	// There was an error
-	console.warn('Something went wrong.', err);
-});
+  <head>
+    <script>
+      fetch('https://api.github.com/repos/khiopsrelease/kv-release/releases')
+        .then(function (response) {
+          // The API call was successful!
+          return response.json();
+        })
+        .then(function (data) {
+          // This is the JSON from our response
+          console.log(data);
+          show(data);
+        })
+        .catch(function (err) {
+          // There was an error
+          console.warn('Something went wrong.', err);
+        });
 
-</script>
-</head>
-<body>
-hello
+      function show(data) {
+        const ul = document.getElementById('posts');
+        const list = document.createDocumentFragment();
 
-</body>
+        data.map(function (post) {
+          console.log(post);
+
+          let li = document.createElement('li');
+          let title = document.createElement('h1');
+          let body = document.createElement('p');
+          title.innerHTML = `${post.name}`;
+
+          try {
+            body.innerHTML = `win downloads : ${post.assets[6].download_count}`;
+          } catch (e) {}
+          li.appendChild(title);
+          li.appendChild(body);
+          list.appendChild(li);
+        });
+
+        ul.appendChild(list);
+      }
+    </script>
+  </head>
+  <body>
+    <section id="section">
+      <ul id="posts"></ul>
+    </section>
+  </body>
 </html>
