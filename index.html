@@ -16,24 +16,36 @@
     </script>
   </head>
   <body>
-    <h1>Khiops Visualization</h1>
-    <section>
-      <div class="canvas-container">
-        <canvas id="kv-dl" height="200px"></canvas>
-      </div>
-      <div class="canvas-container">
-        <canvas id="kv-launch" height="200px"></canvas>
-      </div>
-    </section>
-    <h1>Khiops Covisualization</h1>
-    <section>
-      <div class="canvas-container">
-        <canvas id="kc-dl" height="200px"></canvas>
-      </div>
+    <fieldset>
+      <legend>Khiops Visualization</legend>
+      <section>
+        <div class="canvas-container">
+          <canvas id="kv-dl" height="200px"></canvas>
+        </div>
+        <div class="canvas-container">
+          <canvas id="kv-launch" height="200px"></canvas>
+        </div>
+      </section>
+      <section>
+        <p id="stats-kv-dl"></p>
+        <p id="stats-kv-launch"></p>
+      </section>
+    </fieldset>
 
-      <div class="canvas-container">
-        <canvas id="kc-launch" height="200px"></canvas>
-      </div>
-    </section>
+    <fieldset>
+      <legend>Khiops Covisualization</legend>
+      <section>
+        <div class="canvas-container">
+          <canvas id="kc-dl" height="200px"></canvas>
+        </div>
+        <div class="canvas-container">
+          <canvas id="kc-launch" height="200px"></canvas>
+        </div>
+      </section>
+      <section>
+        <p id="stats-kc-dl"></p>
+        <p id="stats-kc-launch"></p>
+      </section>
+    </fieldset>
   </body>
 </html>

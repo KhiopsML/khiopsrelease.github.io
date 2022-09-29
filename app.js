@@ -1,44 +1,54 @@
 function init() {
-  fetch("https://api.github.com/repos/khiopsrelease/kv-release/releases")
+  const urlKv = "https://api.github.com/repos/khiopsrelease/kv-release/releases";
+  const urlKc = "https://api.github.com/repos/khiopsrelease/kc-release/releases";
+//   const urlKv = "mock-kv.json";
+//   const urlKc = "mock-kc.json";
+
+  fetch(urlKv)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       console.log("🚀 ~ file: app.js ~ line 32 ~ data", data);
-      chart(
+      var resDl = chart(
         data,
         document.getElementById("kv-dl"),
         "Downloads count",
         "download_count"
       );
-      chart(
+      stats(resDl, "stats-kv-dl");
+      var resLaunch = chart(
         data,
         document.getElementById("kv-launch"),
-        "Launch count",
+        "Launches count",
         "launch_count"
       );
+      stats(resLaunch, "stats-kv-launch");
     })
     .catch(function (err) {
       console.warn(err);
     });
-  fetch("https://api.github.com/repos/khiopsrelease/kc-release/releases")
+  fetch(urlKc)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       console.log("🚀 ~ file: app.js ~ line 32 ~ data", data);
-      chart(
+      var resDl = chart(
         data,
         document.getElementById("kc-dl"),
         "Downloads count",
         "download_count"
       );
-      chart(
+      stats(resDl, "stats-kc-dl");
+
+      var resLaunch = chart(
         data,
         document.getElementById("kc-launch"),
-        "Launch count",
+        "Launches count",
         "launch_count"
       );
+      stats(resLaunch, "stats-kc-launch");
     })
     .catch(function (err) {
       console.warn(err);
@@ -152,6 +162,9 @@ function chart(data, ctx, title, type) {
     type: "bar",
     data: chartDatas,
     options: {
+      animation: {
+        duration: 0,
+      },
       plugins: {
         title: {
           display: true,
@@ -170,4 +183,29 @@ function chart(data, ctx, title, type) {
     },
   };
   const myChart = new Chart(ctx, config);
+
+  return chartDatas;
+}
+
+function stats(data, div) {
+  const p = document.getElementById(div);
+  let win = data.datasets[0].data.reduce((a, b) => a + b, 0);
+  let spanWin = document.createElement("span");
+  spanWin.innerHTML = `win : ${win}`;
+  p.appendChild(spanWin);
+
+  let linux = data.datasets[1].data.reduce((a, b) => a + b, 0);
+  let spanLinux = document.createElement("span");
+  spanLinux.innerHTML = `Linux : ${linux}`;
+  p.appendChild(spanLinux);
+
+  let mac = data.datasets[2].data.reduce((a, b) => a + b, 0);
+  let spanMac = document.createElement("span");
+  spanMac.innerHTML = `Mac : ${mac}`;
+  p.appendChild(spanMac);
+
+  let tot = win + mac + linux;
+  let spanTot = document.createElement("b");
+  spanTot.innerHTML = `Total : ${tot}`;
+  p.appendChild(spanTot);
 }

@@ -1,3 +1,7 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 section {
   display: flex;
   flex-direction: row;
@@ -6,14 +10,44 @@ section {
   justify-content: center;
 }
 
-h1 {
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  margin-top: 60px;
+fieldset {
+  margin: 20px 0 40px 0;
+  border-style: dashed;
+}
+
+legend {
+  background-color: #264653;
+  color: #fff;
+  padding: 3px 6px;
 }
 
 .canvas-container {
   margin: 1vw;
-  width: 45vw !important;
+  width: 43vw !important;
   display: flex;
+}
+
+p {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 43vw;
+  margin: 1vw;
+  padding: 1vw;
+}
+
+b {
+  background-color: #2a9d8f;
+  color: white;
+  font-weight: 500;
+  padding: 4px 8px;
+  width: 100%;
+}
+
+span {
+  background-color: #2a9d8f12;
+  width: 100%;
+  padding: 2px 8px;
 }
