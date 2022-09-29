@@ -1,8 +1,10 @@
 function init() {
-  const urlKv = "https://api.github.com/repos/khiopsrelease/kv-release/releases";
-  const urlKc = "https://api.github.com/repos/khiopsrelease/kc-release/releases";
-//   const urlKv = "mock-kv.json";
-//   const urlKc = "mock-kc.json";
+  const urlKv =
+    "https://api.github.com/repos/khiopsrelease/kv-release/releases";
+  const urlKc =
+    "https://api.github.com/repos/khiopsrelease/kc-release/releases";
+  // const urlKv = "mock-kv.json";
+  // const urlKc = "mock-kc.json";
 
   fetch(urlKv)
     .then(function (response) {
@@ -108,7 +110,10 @@ function chart(data, ctx, title, type) {
     for (let j = 0; j < release.assets.length; j++) {
       const version = release.assets[j];
       if (type === "download_count") {
-        if (version.name.includes(".exe")) {
+        if (
+          version.name.includes(".exe") &&
+          !version.name.includes(".exe.blockmap")
+        ) {
           if (!chartDatas.datasets[0].data[i]) {
             chartDatas.datasets[0].data[i] = 0;
           }
@@ -126,6 +131,10 @@ function chart(data, ctx, title, type) {
         }
         if (
           version.name.includes(".dmg") ||
+          (version.name.includes(".dmg") &&
+            !version.name.includes(".dmg.blockmap")) ||
+          (version.name.includes(".mac.zip") &&
+            !version.name.includes(".mac.zip.blockmap")) ||
           version.name.includes(".AppImage")
         ) {
           if (!chartDatas.datasets[2].data[i]) {
