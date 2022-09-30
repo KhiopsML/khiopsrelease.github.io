@@ -200,7 +200,7 @@ function stats(data, div) {
   const p = document.getElementById(div);
   let win = data.datasets[0].data.reduce((a, b) => a + b, 0);
   let spanWin = document.createElement("span");
-  spanWin.innerHTML = `win : ${win}`;
+  spanWin.innerHTML = `Windows : ${win}`;
   p.appendChild(spanWin);
 
   let linux = data.datasets[1].data.reduce((a, b) => a + b, 0);
