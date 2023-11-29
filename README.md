@@ -1,3 +1,3 @@
-# khiopsrelease.github.io
+# Khiops Electron metrics
 
-[khiopsrelease.github.io](https://khiopsrelease.github.io)
+https://khiopsml.github.io/khiopsrelease.github.io/
